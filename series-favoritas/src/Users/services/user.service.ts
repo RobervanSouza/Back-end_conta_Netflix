@@ -9,6 +9,7 @@ export class UserService {
     this.users.push(usuariosInterface);
     return usuariosInterface;
   }
+
   async updateUser(userData: UserPartialDto): Promise<Iusuarios> {
     this.users.map((user, index) => {
       if (user.id === userData.id) {
