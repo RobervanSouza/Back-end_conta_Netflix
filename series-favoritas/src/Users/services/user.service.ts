@@ -20,4 +20,26 @@ export class UserService {
     const updateUser = this.users.find((user) => user.id === userData.id);
     return updateUser;
   }
+  async getAllUsuarios(): Promise<Iusuarios[]> {
+    return this.users;
+  }
+  async deleteUserById(userId: string): Promise<boolean> {
+    const existUser = this.users.find((user) => user.id === userId);
+    if (!existUser) {
+      return false;
+    }
+    this.users.map((user, index) => {
+      if (user.id === userId) {
+        this.users.splice(index, 1);
+      }
+    });
+    return true;
+  }
+  async getUsuarioById(userId: string): Promise<Iusuarios> {
+    const existeUsuario = this.users.find((user) => user.id === userId);
+    if (!existeUsuario) {
+      throw new Error('User not found');
+    }
+    return existeUsuario;
+  }
 }
