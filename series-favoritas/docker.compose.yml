@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+ database:
+    image: bitnami/postgresql
+    ports: 
+      - '5431:5432'
+    container_name: projeto seris
+    restart: always
+    volumes: 
+      - projeto-series:/var/lib/postgresql/data
+    environment: 
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: series
+volumes: 
+  projeto-series:
