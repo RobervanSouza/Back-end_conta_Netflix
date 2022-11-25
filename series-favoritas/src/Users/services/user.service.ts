@@ -24,8 +24,8 @@ export class UserService {
     return this.users;
   }
   async deleteUserById(userId: string): Promise<boolean> {
-    const existUser = this.users.find((user) => user.id === userId);
-    if (!existUser) {
+    const existerUsuario = this.users.find((user) => user.id === userId);
+    if (!existerUsuario) {
       return false;
     }
     this.users.map((user, index) => {

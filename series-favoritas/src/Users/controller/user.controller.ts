@@ -15,6 +15,14 @@ export class UsuariosController {
   async getAllUsuarios(): Promise<Iusuarios[]> {
     return await this.service.getAllUsuarios();
   }
+  @Get(':id')
+  async getIdUsuario(@Param('id') usuarioId: string): Promise<Iusuarios> {
+    try {
+      return await this.service.getUsuarioById(usuarioId);
+    } catch (erro) {
+      console.log(erro);
+    }
+  }
   @Post()
   async createUsuario(
     @Body() { cpf, email, password, name, role }: UsuarioDto,
@@ -40,13 +48,13 @@ export class UsuariosController {
     }
   }
   @Delete(':id')
-  async removeUsuarioById(@Param('id') userId: string): Promise<string> {
+  async deleteUserById(@Param('id') userId: string): Promise<string> {
     try {
       const userIsDeleted = await this.service.deleteUserById(userId);
       if (userIsDeleted) {
-        return 'User deleted successfully';
+        return 'usuario deletado com sucesso';
       } else {
-        return 'User not found';
+        return 'usuario não encontrado';
       }
     } catch (err) {
       console.log(err);
