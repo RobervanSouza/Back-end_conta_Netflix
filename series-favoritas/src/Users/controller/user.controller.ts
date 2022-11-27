@@ -4,21 +4,21 @@ import { Iusuarios } from '../UsuariosInterface/usuarios';
 
 import { Controller } from '@nestjs/common';
 import { UserService } from '../services/user.service';
-import { UsuarioDto } from '../services/dto/userdto';
-import { UserPartialDto } from '../services/dto/UserParcialDto';
+import { UsuarioDto } from '../dto/userdto';
+import { UserPartialDto } from '../dto/UserParcialDto';
 
-@Controller()
+@Controller('User')
 export class UsuariosController {
   constructor(private readonly service: UserService) {}
 
   @Get()
   async getAllUsuarios(): Promise<Iusuarios[]> {
-    return await this.service.getAllUsuarios();
+    return await this.service.todosUsuarios();
   }
   @Get(':id')
   async getIdUsuario(@Param('id') usuarioId: string): Promise<Iusuarios> {
     try {
-      return await this.service.getUsuarioById(usuarioId);
+      return await this.service.UsuarioById(usuarioId);
     } catch (erro) {
       console.log(erro);
     }
@@ -36,13 +36,13 @@ export class UsuariosController {
         role,
       });
     } catch (erro) {
-      console.log(erro);
+      console.log(` afosoasdasdas${this.createUsuario}`);
     }
   }
   @Patch()
   async updateUser(@Body() userdata: UserPartialDto): Promise<Iusuarios> {
     try {
-      return await this.service.updateUser(userdata);
+      return await this.service.updateUsuario(userdata);
     } catch (erro) {
       console.log(erro);
     }
