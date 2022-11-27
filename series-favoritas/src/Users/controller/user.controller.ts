@@ -1,4 +1,13 @@
-import { Body, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Res,
+} from '@nestjs/common';
 
 import { Iusuarios } from '../UsuariosInterface/usuarios';
 
@@ -6,16 +15,17 @@ import { Controller } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { UsuarioDto } from '../dto/userdto';
 import { UserPartialDto } from '../dto/UserParcialDto';
+import { Response } from 'express';
 
-@Controller('User')
+@Controller()
 export class UsuariosController {
   constructor(private readonly service: UserService) {}
 
-  @Get()
+  @Get('Todos-usuarios')
   async getAllUsuarios(): Promise<Iusuarios[]> {
     return await this.service.todosUsuarios();
   }
-  @Get(':id')
+  @Get('Procura-usuario-pelo:id')
   async getIdUsuario(@Param('id') usuarioId: string): Promise<Iusuarios> {
     try {
       return await this.service.UsuarioById(usuarioId);
@@ -23,23 +33,26 @@ export class UsuariosController {
       console.log(erro);
     }
   }
-  @Post()
+  @Post('Cria-usuario')
   async createUsuario(
     @Body() { cpf, email, password, name, role }: UsuarioDto,
-  ): Promise<Iusuarios> {
+    @Res() response: Response,
+  ) {
     try {
-      return await this.service.createUsuario({
+      const result = await this.service.createUsuario({
         cpf,
         email,
         password,
         name,
         role,
       });
+      response.status(201).send(result);
     } catch (erro) {
-      console.log(` afosoasdasdas${this.createUsuario}`);
+      console.log(erro);
+      throw new BadRequestException(erro.message);
     }
   }
-  @Patch()
+  @Patch('Edita-usuario')
   async updateUser(@Body() userdata: UserPartialDto): Promise<Iusuarios> {
     try {
       return await this.service.updateUsuario(userdata);
@@ -47,7 +60,7 @@ export class UsuariosController {
       console.log(erro);
     }
   }
-  @Delete(':id')
+  @Delete('Deleta-usuario:id')
   async deleteUserById(@Param('id') userId: string): Promise<string> {
     try {
       const userIsDeleted = await this.service.deleteUserById(userId);
