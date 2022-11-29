@@ -20,3 +20,4 @@ model User{
   create DateTime @default(now())
   update DateTime @updatedAt
 }
+// npx prisma init

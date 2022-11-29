@@ -1,5 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { INestApplication, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+import {
+  INestApplication,
+  OnModuleDestroy,
+  OnModuleInit,
+} from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 export class PrismaService
   extends PrismaClient
@@ -11,9 +15,9 @@ export class PrismaService
   async onModuleInit() {
     await this.$connect();
   }
-  async enableShutdownhooks(app: INestApplication){
+  async enableShutdownhooks(app: INestApplication) {
     this.$on('beforeExit', async () => {
       await app.close();
     });
-  } 
+  }
 }
