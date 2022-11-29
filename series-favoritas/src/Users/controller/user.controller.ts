@@ -1,13 +1,4 @@
-import {
-  BadRequestException,
-  Body,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  Res,
-} from '@nestjs/common';
+import { Body, Delete, Get, Param, Patch, Post, Res } from '@nestjs/common';
 
 import { Iusuarios } from '../UsuariosInterface/usuarios';
 
