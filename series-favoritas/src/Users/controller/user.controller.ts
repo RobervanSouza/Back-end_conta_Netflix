@@ -16,6 +16,7 @@ import { UserService } from '../services/user.service';
 import { UsuarioDto } from '../dto/userdto';
 import { UserPartialDto } from '../dto/UserParcialDto';
 import { Response } from 'express';
+import { HandleException } from 'src/exceptions/exceptions.Erro';
 
 @Controller()
 export class UsuariosController {
@@ -48,8 +49,7 @@ export class UsuariosController {
       });
       response.status(201).send(result);
     } catch (erro) {
-      console.log(erro);
-      throw new BadRequestException(erro.message);
+      HandleException(erro);
     }
   }
   @Patch('Edita-usuario')
@@ -57,7 +57,7 @@ export class UsuariosController {
     try {
       return await this.service.updateUsuario(userdata);
     } catch (erro) {
-      console.log(erro);
+      HandleException(erro);
     }
   }
   @Delete('Deleta-usuario:id')

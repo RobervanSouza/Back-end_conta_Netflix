@@ -4,13 +4,18 @@ import { randomUUID } from 'node:crypto';
 import { UserPartialDto } from '../dto/UserParcialDto';
 import { UsuarioRepository } from 'src/repository/usuario.repository';
 import { Injectable } from '@nestjs/common';
+import { Exception } from 'src/exceptions/exception';
+import { Exceptions } from 'src/exceptions/exceptions.Erro';
 @Injectable()
 export class UserService {
   constructor(private readonly userRepository: UsuarioRepository) {}
   async createUsuario(user: UsuarioDto): Promise<Iusuarios> {
     const usuariosInterface = { ...user, id: randomUUID() };
     if (user.password.length <= 7) {
-      throw new Error('Sua senha tem que ter mais de 7 Digitos ');
+      throw new Exception(
+        Exceptions.InvaliData,
+        'Sua senha tem que ter mais de 6 caracteres ',
+      );
     }
     const usuarioCriado = await this.userRepository.createUsuario(
       usuariosInterface,
@@ -34,7 +39,10 @@ export class UserService {
         return false;
       }
     } catch (error) {
-      console.log(error);
+      throw new Exception(
+        Exceptions.DataBaseException,
+        'Sua senha tem que ter mais de 6 caracteres ',
+      );
       return false;
     }
   }
@@ -43,18 +51,3 @@ export class UserService {
     return existeUsuario;
   }
 }
-
-/*
-async findUserById(id: string): Promise<IUserEntity> {
-    const foundUser = await this.prisma.user.findUniqueOrThrow({
-      where: { id: id },
-    });
-
-    return foundUser;
-  }
-  
-  async getUserById(userId: string): Promise<IUserEntity> {
-    const foundUser = await this.userRepository.findUserById(userId);
-    return foundUser;
-  }
-*/

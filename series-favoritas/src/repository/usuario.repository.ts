@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { Exception } from 'src/exceptions/exception';
+import { Exceptions } from 'src/exceptions/exceptions.Erro';
 import { PrismaService } from 'src/prisma/service&database/prisma.service';
 
 import { UserPartialDto } from 'src/Users/dto/UserParcialDto';
@@ -7,39 +9,65 @@ import { Iusuarios } from 'src/Users/UsuariosInterface/usuarios';
 export class UsuarioRepository {
   constructor(private readonly prisma: PrismaService) {}
   async createUsuario(user: Iusuarios): Promise<Iusuarios> {
-    const createUsuario = await this.prisma.user.create({ data: user });
-    return createUsuario;
+    try {
+      const createUsuario = await this.prisma.user.create({ data: user });
+      return createUsuario;
+    } catch (erro) {
+      throw new Exception(
+        Exceptions.DataBaseException,
+        'Erro ao cadastrar o usuario, CPf ou Email ja cadastrado',
+      );
+    }
   }
   async updateUsuario(user: UserPartialDto): Promise<Iusuarios> {
-    const updateUsuario = await this.prisma.user.update({
-      where: { id: user.id },
-      data: user,
-    });
-    return updateUsuario;
+    try {
+      const updateUsuario = await this.prisma.user.update({
+        where: { id: user.id },
+        data: user,
+      });
+      return updateUsuario;
+    } catch (erro) {
+      throw new Exception(
+        Exceptions.DataBaseException,
+        'verifique o Id do usuario',
+      );
+    }
   }
   async deleteUsuario(id: string): Promise<Iusuarios> {
-    const deleteUsuario = await this.prisma.user.delete({
-      where: { id: id },
-    });
-    return deleteUsuario;
+    try {
+      const deleteUsuario = await this.prisma.user.delete({
+        where: { id: id },
+      });
+      return deleteUsuario;
+    } catch (erro) {
+      throw new Exception(
+        Exceptions.DataBaseException,
+        'User not found in database',
+      );
+    }
   }
   async todosUsuarios(): Promise<Iusuarios[]> {
-    const todosUsuarios = await this.prisma.user.findMany();
-    return todosUsuarios;
+    try {
+      const todosUsuarios = await this.prisma.user.findMany();
+      return todosUsuarios;
+    } catch (erro) {
+      throw new Exception(
+        Exceptions.DataBaseException,
+        'Nenhum usuario cadastrado',
+      );
+    }
   }
   async findUsuarioById(id: string): Promise<Iusuarios> {
-    const idUsuario = await this.prisma.user.findUniqueOrThrow({
-      where: { id: id },
-    });
-    return idUsuario;
+    try {
+      const idUsuario = await this.prisma.user.findUniqueOrThrow({
+        where: { id: id },
+      });
+      return idUsuario;
+    } catch (erro) {
+      throw new Exception(
+        Exceptions.DataBaseException,
+        'verifique o ID do usuario',
+      );
+    }
   }
 }
-/*
-async findUserById(id: string): Promise<IUserEntity> {
-    const foundUser = await this.prisma.user.findUniqueOrThrow({
-      where: { id: id },
-    });
-
-    return foundUser;
-  }
-*/
