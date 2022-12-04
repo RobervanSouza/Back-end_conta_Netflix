@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="76nVDwhcdYPv3L1FuHO6" name="Descrição do projeto">
-        <mxGraphModel dx="2391" dy="567" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1237" dy="425" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -25,7 +25,7 @@
                 <mxCell id="7" value="&lt;font style=&quot;font-size: 24px&quot;&gt;conta=&lt;br&gt;&lt;br&gt;&amp;nbsp;id:&lt;br&gt;ADMIN:[1/0]&lt;br&gt;series:[varios]&lt;br&gt;filmes:[varios]&lt;br&gt;documentarios:[]&lt;br&gt;usuarios:[ 0/varios ]&lt;br&gt;listaUsuarios[0/V]&lt;br&gt;&lt;br&gt;&lt;/font&gt;" style="shape=ext;double=1;rounded=1;whiteSpace=wrap;html=1;container=1;" parent="1" vertex="1">
                     <mxGeometry x="-55" y="35" width="240" height="230" as="geometry"/>
                 </mxCell>
-                <mxCell id="8" value="Lista usuarios=&lt;br&gt;&lt;br&gt;conta: [1]&lt;br&gt;date:&lt;br&gt;startData:&lt;br&gt;endData:&lt;br&gt;usuarios:[ 0/varios ]" style="shape=ext;double=1;rounded=1;whiteSpace=wrap;html=1;fontSize=20;" parent="1" vertex="1">
+                <mxCell id="8" value="Lista usuarios=&lt;br&gt;&lt;br&gt;conta: [1]&lt;br&gt;dateCriaçãoDoPerfil:&lt;br&gt;startPerfil:&lt;br&gt;endPerfil:&lt;br&gt;usuarios:[ 0/varios ]" style="shape=ext;double=1;rounded=1;whiteSpace=wrap;html=1;fontSize=20;" parent="1" vertex="1">
                     <mxGeometry x="319" y="260" width="240" height="200" as="geometry"/>
                 </mxCell>
                 <mxCell id="13" value="&lt;span style=&quot;font-size: 24px&quot;&gt;N:1&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">

@@ -1,3 +1,4 @@
+import { CreateListaUsuarioDto } from 'src/lista-usuarios/dto/create-lista-usuario.dto';
 import { Iusuarios } from 'src/Users/UsuariosInterface/usuarios';
 
 export class CreateContaDto {
@@ -8,5 +9,5 @@ export class CreateContaDto {
   shows: string;
   usuarios: Iusuarios[];
   admin: Iusuarios[];
-  listaUsuarios: string;
+  listaUsuarios: CreateListaUsuarioDto[];
 }
