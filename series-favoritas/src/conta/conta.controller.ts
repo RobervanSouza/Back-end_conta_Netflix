@@ -7,12 +7,11 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { ApiProperty, ApiTags } from '@nestjs/swagger';
+
 import { ContaService } from './conta.service';
 import { CreateContaDto } from './dto/create-conta.dto';
 import { UpdateContaDto } from './dto/update-conta.dto';
 
-@ApiTags('usuarios')
 @Controller('conta')
 export class ContaController {
   constructor(private readonly contaService: ContaService) {}
