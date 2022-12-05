@@ -1,9 +1,8 @@
-import { Iusuarios } from 'src/Users/UsuariosInterface/usuarios';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString } from 'class-validator';
 
 export class CreateListaUsuarioDto {
-  IdConta: string;
-  usuarios: Iusuarios[];
-  dataCriacaoDoPerfil: Date;
-  startDate: Date;
-  endDate: Date;
+  @ApiProperty()
+  @IsString()
+  contaId: string;
 }

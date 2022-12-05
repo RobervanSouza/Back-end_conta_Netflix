@@ -4,23 +4,25 @@ import { UpdateContaDto } from './dto/update-conta.dto';
 
 @Injectable()
 export class ContaService {
-  create(createContaDto: CreateContaDto) {
+  
+  async create(createContaDto: CreateContaDto) {
     return 'This action adds a new conta';
   }
 
-  findAll() {
+  async findAll() {
     return `This action returns all conta`;
   }
 
-  findOne(id: number) {
+  async findOne(id: string) {
     return `This action returns a #${id} conta`;
   }
 
-  update(id: number, updateContaDto: UpdateContaDto) {
+
+  async update(id: number, updateContaDto: UpdateContaDto) {
     return `This action updates a #${id} conta`;
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return `This action removes a #${id} conta`;
   }
 }

@@ -1,26 +1,47 @@
 import { Injectable } from '@nestjs/common';
+import { randomUUID } from 'crypto';
+import { ContaService } from 'src/conta/conta.service';
 import { CreateListaUsuarioDto } from './dto/create-lista-usuario.dto';
 import { UpdateListaUsuarioDto } from './dto/update-lista-usuario.dto';
-
+import { ListaUsuario } from './entities/lista-usuario.entity';
+// teteet
+//eger
+//adasdasd
 @Injectable()
 export class ListaUsuariosService {
-  create(createListaUsuarioDto: CreateListaUsuarioDto) {
-    return 'This action adds a new listaUsuario';
+  private _listaUsuarios: ListaUsuario[] = [];
+  constructor(private readonly contaService: ContaService) {}
+  async create(
+    createListaUsuarioDto: CreateListaUsuarioDto,
+  ): Promise<ListaUsuario> {
+    await this.contaService.findOne(createListaUsuarioDto.contaId);
+    const endPerfil = 1 * 60 * 1000;
+    const dataCriacaoDoPerfil = new ListaUsuario();
+    (dataCriacaoDoPerfil.id = randomUUID()),
+      (dataCriacaoDoPerfil.startPerfil = new Date(Date.now())),
+      (dataCriacaoDoPerfil.endPerfil = new Date(Date.now() + endPerfil)),
+      (dataCriacaoDoPerfil.usuarios = []),
+      (dataCriacaoDoPerfil.dataCriacaoDoPerfil = new Date(
+        Date.now(),
+      ).toISOString()),
+      this._listaUsuarios.push(dataCriacaoDoPerfil);
+    return Promise.resolve(dataCriacaoDoPerfil);
   }
 
-  findAll() {
+  async findAll() {
     return `This action returns all listaUsuarios`;
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return `This action returns a #${id} listaUsuario`;
   }
 
-  update(id: number, updateListaUsuarioDto: UpdateListaUsuarioDto) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async update(id: number, updateListaUsuarioDto: UpdateListaUsuarioDto) {
     return `This action updates a #${id} listaUsuario`;
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return `This action removes a #${id} listaUsuario`;
   }
 }

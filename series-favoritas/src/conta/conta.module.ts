@@ -4,6 +4,6 @@ import { ContaController } from './conta.controller';
 
 @Module({
   controllers: [ContaController],
-  providers: [ContaService]
+  providers: [ContaService],
 })
 export class ContaModule {}
