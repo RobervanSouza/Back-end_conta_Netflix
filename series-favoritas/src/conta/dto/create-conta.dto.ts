@@ -1,15 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CreateListaUsuarioDto } from 'src/Lista-usuarios/dto/create-lista-usuario.dto';
-import { Iusuarios } from 'src/Users/UsuariosInterface/usuarios';
+import { IsString } from 'class-validator';
 
 export class CreateContaDto {
   @ApiProperty()
+  @IsString()
   series: string;
+  @ApiProperty()
+  @IsString()
   filmes: string;
+  @ApiProperty()
+  @IsString()
   documentarios: string;
+  @ApiProperty()
+  @IsString()
   desenhos: string;
+  @ApiProperty()
+  @IsString()
   shows: string;
-  usuarios: Iusuarios[];
-  admin: Iusuarios[];
-  listaUsuarios: CreateListaUsuarioDto[];
 }

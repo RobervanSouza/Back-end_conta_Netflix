@@ -8,9 +8,12 @@ import { Conta } from './entities/conta.entity';
 export class ContaService {
   private _listaConta: Conta[] = [];
   async create(createContaDto: CreateContaDto): Promise<Conta> {
-    const createConta = {
+    const createConta: Conta = {
       ...createContaDto,
       id: randomUUID(),
+      usuarios: [],
+      admin: [],
+      listaUsuarios: [],
     };
     this._listaConta.push(createConta);
     return createConta;
@@ -20,15 +23,15 @@ export class ContaService {
     return this._listaConta;
   }
 
-  async findOne(id: string) {
+  async findOne(id: string): Promise<Conta> {
     return this._listaConta.find((conta) => conta.id == id);
   }
 
-  async update(id: string, updateContaDto: UpdateContaDto) {
+  async update(id: string, updateContaDto: UpdateContaDto): Promise<Conta> {
     this._listaConta.map((conta, index) => {
       if (conta.id == id) {
         const updateConta = Object.assign(conta, updateContaDto);
-        this._listaConta.splice(0, 1, updateConta);
+        this._listaConta.splice(index, 1, updateConta);
       }
     });
 

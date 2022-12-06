@@ -33,11 +33,11 @@ export class ContaController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateContaDto: UpdateContaDto) {
-    return this.contaService.update(+id, updateContaDto);
+    return this.contaService.update(id, updateContaDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.contaService.remove(+id);
+    return this.contaService.remove(id);
   }
 }
