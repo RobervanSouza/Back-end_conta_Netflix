@@ -15,16 +15,15 @@ export class ListaUsuariosService {
     createListaUsuarioDto: CreateListaUsuarioDto,
   ): Promise<ListaUsuario> {
     await this.contaService.findOne(createListaUsuarioDto.contaId);
+    const formatarData = new Date(Date.now()).toISOString().slice(0, 10);
     const endPerfil = 1 * 60 * 1000;
     const dataCriacaoDoPerfil = new ListaUsuario();
     (dataCriacaoDoPerfil.id = randomUUID()),
       (dataCriacaoDoPerfil.startPerfil = new Date(Date.now())),
       (dataCriacaoDoPerfil.endPerfil = new Date(Date.now() + endPerfil)),
       (dataCriacaoDoPerfil.usuarios = []),
-      (dataCriacaoDoPerfil.dataCriacaoDoPerfil = new Date(
-        Date.now(),
-      ).toISOString()),
-      this._listaUsuarios.push(dataCriacaoDoPerfil);
+      (dataCriacaoDoPerfil.dataCriacaoDoPerfil = formatarData);
+    this._listaUsuarios.push(dataCriacaoDoPerfil);
     return Promise.resolve(dataCriacaoDoPerfil);
   }
 
