@@ -1,26 +1,46 @@
 import { Injectable } from '@nestjs/common';
+import { randomUUID } from 'crypto';
 import { CreateContaDto } from './dto/create-conta.dto';
 import { UpdateContaDto } from './dto/update-conta.dto';
+import { Conta } from './entities/conta.entity';
 
 @Injectable()
 export class ContaService {
-  async create(createContaDto: CreateContaDto) {
-    return 'This action adds a new conta';
+  private _listaConta: Conta[] = [];
+  async create(createContaDto: CreateContaDto): Promise<Conta> {
+    const createConta = {
+      ...createContaDto,
+      id: randomUUID(),
+    };
+    this._listaConta.push(createConta);
+    return createConta;
   }
 
-  async findAll() {
-    return `This action returns all conta`;
+  async findAll(): Promise<Conta[]> {
+    return this._listaConta;
   }
 
   async findOne(id: string) {
-    return `This action returns a #${id} conta`;
+    return this._listaConta.find((conta) => conta.id == id);
   }
 
-  async update(id: number, updateContaDto: UpdateContaDto) {
-    return `This action updates a #${id} conta`;
+  async update(id: string, updateContaDto: UpdateContaDto) {
+    this._listaConta.map((conta, index) => {
+      if (conta.id == id) {
+        const updateConta = Object.assign(conta, updateContaDto);
+        this._listaConta.splice(0, 1, updateConta);
+      }
+    });
+
+    return this.findOne(id);
   }
 
-  async remove(id: number) {
-    return `This action removes a #${id} conta`;
+  async remove(id: string): Promise<string> {
+    await this._listaConta.map((conta, index) => {
+      if (conta.id == id) {
+        this._listaConta.splice(index, 1);
+      }
+    });
+    return Promise.resolve('deletado com sucesso!!');
   }
 }
