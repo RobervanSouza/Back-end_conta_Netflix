@@ -10,6 +10,8 @@ import {
 import { ListaUsuariosService } from './lista-usuarios.service';
 import { CreateListaUsuarioDto } from './dto/create-lista-usuario.dto';
 import { UpdateListaUsuarioDto } from './dto/update-lista-usuario.dto';
+import { RegistrarPerfilDto } from './dto/rigistrar-novo-perfil';
+import { HandleException } from 'src/exceptions/exceptions.Erro';
 
 @Controller('lista-usuarios')
 export class ListaUsuariosController {
@@ -20,6 +22,15 @@ export class ListaUsuariosController {
     return this.listaUsuariosService.create(createListaUsuarioDto);
   }
 
+  @Post('RegistarPerfil')
+  async registrarPerfil(@Body() { perfilId, userId }: RegistrarPerfilDto) {
+    try {
+      return await this.listaUsuariosService.RegistrarPerfil(perfilId, userId);
+    } catch (error) {
+      HandleException(error);
+    }
+  }
+
   @Get()
   findAll() {
     return this.listaUsuariosService.findAll();
@@ -27,7 +38,7 @@ export class ListaUsuariosController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.listaUsuariosService.findOne(+id);
+    return this.listaUsuariosService.findOne(id);
   }
 
   @Patch(':id')

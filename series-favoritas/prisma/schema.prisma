@@ -10,14 +10,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id String @id @unique
-  name String
-  email String @unique
-  password String
-  cpf String @unique
-  role String
-  create DateTime @default(now())
-  update DateTime @updatedAt
+model User {
+  id            String         @id @unique
+  name          String
+  email         String         @unique
+  password      String
+  cpf           String         @unique
+  role          String
+  create        DateTime       @default(now())
+  update        DateTime       @updatedAt
+  listaUsuario  ListaUsuario[]
+  ContaUsuario   Conta?      @relation(fields: [contaUsuarioId], references: [id], name: "perfil")
+  contaUsuarioId String?
+  ContaAdmin    Conta?    @relation(fields: [contaAdminId], references: [id])
+  contaAdminId  String?
+ 
 }
-// npx prisma init
+
+
+
+model ListaUsuario {
+  id                  String   @id @unique
+  contaId             String
+  Conta               Conta    @relation(fields: [contaId], references: [id])
+  usuarios            User[]
+  dataCriacaoDoPerfil String
+  startPerfil         DateTime
+  endPerfil           DateTime
+}
+
+model Conta {
+  id            String         @id @unique
+  series        String
+  filmes        String
+  documentarios String
+  desenhos      String
+  shows         String
+  listaUsuario  ListaUsuario[]
+  usuarios      User[]         @relation(name: "perfil")
+  admin         User[]
+  
+}
