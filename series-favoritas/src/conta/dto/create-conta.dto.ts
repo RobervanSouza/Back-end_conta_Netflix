@@ -17,4 +17,8 @@ export class CreateContaDto {
   @ApiProperty()
   @IsString()
   shows: string;
+  @ApiProperty()
+  usuariosIds?: string[];
+  @ApiProperty()
+  adminIds?: string[];
 }

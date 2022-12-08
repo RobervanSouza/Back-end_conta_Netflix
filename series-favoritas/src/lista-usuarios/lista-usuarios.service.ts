@@ -6,13 +6,16 @@ import { Exceptions } from 'src/exceptions/exceptions.Erro';
 import { CreateListaUsuarioDto } from './dto/create-lista-usuario.dto';
 import { UpdateListaUsuarioDto } from './dto/update-lista-usuario.dto';
 import { ListaUsuario } from './entities/lista-usuario.entity';
+import { ListaUsuariosRepository } from './lista-usuarios.repository';
 // teteet
 //eger
 //adasdasd
 @Injectable()
 export class ListaUsuariosService {
-  private _listaUsuarios: ListaUsuario[] = [];
-  constructor(private readonly contaService: ContaService) {}
+  constructor(
+    private readonly contaService: ContaService,
+    private readonly listaUsuariosRepository: ListaUsuariosRepository,
+  ) {}
   async create(
     createListaUsuarioDto: CreateListaUsuarioDto,
   ): Promise<ListaUsuario> {
@@ -27,34 +30,38 @@ export class ListaUsuariosService {
       usuarios: [],
       dataCriacaoDoPerfil: formatarData,
     };
-    this._listaUsuarios.push(dataCriacaoDoPerfil);
-    return Promise.resolve(dataCriacaoDoPerfil);
+    return await this.listaUsuariosRepository.createListaUsuario(
+      dataCriacaoDoPerfil,
+    );
   }
   async findAll() {
-    return this._listaUsuarios;
+    return await this.listaUsuariosRepository.todosUsuarios();
   }
 
   async findOne(id: string): Promise<ListaUsuario> {
-    const findListaUsuarios = await this._listaUsuarios.find(
-      (listaUsuario) => listaUsuario.id == id,
-    );
+    const findListaUsuarios =
+      await this.listaUsuariosRepository.IdListaUsuarios(id);
     return findListaUsuarios;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async update(id: number, updateListaUsuarioDto: UpdateListaUsuarioDto) {
-    return `This action updates a #${id} listaUsuario`;
+  async update(updateListaUsuarioDto: UpdateListaUsuarioDto) {
+    return await this.listaUsuariosRepository.updateListaUsuario(
+      updateListaUsuarioDto,
+    );
   }
-  async RegistrarPerfil(listaUsuario: string, userId: string): Promise<string> {
-    const findListaUsuarios = await this.findOne(listaUsuario);
+  async RegistrarPerfil(
+    listaUsuarioId: string,
+    userId: string,
+  ): Promise<ListaUsuario> {
+    const findListaUsuarios = await this.findOne(listaUsuarioId);
     const dataAtual = new Date(Date.now());
     if (dataAtual.getTime() > findListaUsuarios.endPerfil.getTime()) {
       throw new Exception(Exceptions.InvaliData, 'error ao criar');
     }
-    return 'lista concluida';
-  }
 
-  async remove(id: number) {
-    return `This action removes a #${id} listaUsuario`;
+    return this.listaUsuariosRepository.updateListaUsuario({
+      id: listaUsuarioId,
+      usuariosId: [userId],
+    });
   }
 }

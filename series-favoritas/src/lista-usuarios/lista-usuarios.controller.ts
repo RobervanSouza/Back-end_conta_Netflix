@@ -5,7 +5,7 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
+  Injectable,
 } from '@nestjs/common';
 import { ListaUsuariosService } from './lista-usuarios.service';
 import { CreateListaUsuarioDto } from './dto/create-lista-usuario.dto';
@@ -13,6 +13,7 @@ import { UpdateListaUsuarioDto } from './dto/update-lista-usuario.dto';
 import { RegistrarPerfilDto } from './dto/rigistrar-novo-perfil';
 import { HandleException } from 'src/exceptions/exceptions.Erro';
 
+@Injectable()
 @Controller('lista-usuarios')
 export class ListaUsuariosController {
   constructor(private readonly listaUsuariosService: ListaUsuariosService) {}
@@ -42,15 +43,7 @@ export class ListaUsuariosController {
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateListaUsuarioDto: UpdateListaUsuarioDto,
-  ) {
-    return this.listaUsuariosService.update(+id, updateListaUsuarioDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.listaUsuariosService.remove(+id);
+  update(@Body() updateListaUsuarioDto: UpdateListaUsuarioDto) {
+    return this.listaUsuariosService.update(updateListaUsuarioDto);
   }
 }

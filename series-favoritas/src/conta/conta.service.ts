@@ -1,49 +1,35 @@
-import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
+import { Exception } from 'src/exceptions/exception';
+import { Exceptions } from 'src/exceptions/exceptions.Erro';
+import { ContaRepository } from './conta.reposytory';
 import { CreateContaDto } from './dto/create-conta.dto';
 import { UpdateContaDto } from './dto/update-conta.dto';
 import { Conta } from './entities/conta.entity';
 
-@Injectable()
 export class ContaService {
-  private _listaConta: Conta[] = [];
+  constructor(private readonly contaRepository: ContaRepository) {}
   async create(createContaDto: CreateContaDto): Promise<Conta> {
-    const createConta: Conta = {
-      ...createContaDto,
-      id: randomUUID(),
-      usuarios: [],
-      admin: [],
-      listaUsuarios: [],
-    };
-    this._listaConta.push(createConta);
-    return createConta;
+    const id = randomUUID();
+    return await this.contaRepository.createConta(createContaDto, id);
   }
 
   async findAll(): Promise<Conta[]> {
-    return this._listaConta;
+    return this.contaRepository.findAllConta();
   }
 
   async findOne(id: string): Promise<Conta> {
-    return this._listaConta.find((conta) => conta.id == id);
+    return this.contaRepository.findContaId(id);
   }
 
   async update(id: string, updateContaDto: UpdateContaDto): Promise<Conta> {
-    this._listaConta.map((conta, index) => {
-      if (conta.id == id) {
-        const updateConta = Object.assign(conta, updateContaDto);
-        this._listaConta.splice(index, 1, updateConta);
-      }
-    });
-
-    return this.findOne(id);
+    if (!updateContaDto.usuariosIds && !updateContaDto.adminIds) {
+      throw new Exception(Exceptions.InvaliData, 'não conectado');
+    }
+    return await this.contaRepository.updateConta(updateContaDto);
   }
 
   async remove(id: string): Promise<string> {
-    await this._listaConta.map((conta, index) => {
-      if (conta.id == id) {
-        this._listaConta.splice(index, 1);
-      }
-    });
-    return Promise.resolve('deletado com sucesso!!');
+    await this.contaRepository.deleteConta(id);
+    return 'conta deletada';
   }
 }
