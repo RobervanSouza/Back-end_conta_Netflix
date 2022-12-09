@@ -7,4 +7,6 @@ export class ListaUsuario extends CreateListaUsuarioDto {
   dataCriacaoDoPerfil: string;
   startPerfil: Date;
   endPerfil: Date;
+  imagemUrl: string;
+  nomeUsuario: string;
 }

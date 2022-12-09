@@ -64,6 +64,7 @@ export class ListaUsuariosService {
     if (dataAtual.getTime() > findListaUsuarios.endPerfil.getTime()) {
       throw new Exception(Exceptions.InvaliData, 'error ao criar');
     }
+
     if (!existeConta.usuarios.includes(existeUsuario)) {
       throw new Exception(
         Exceptions.InvaliData,

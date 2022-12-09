@@ -11,7 +11,8 @@ export class ListaUsuariosRepository {
   async createListaUsuario({
     id,
     contaId,
-    usuarios,
+    nomeUsuario,
+    imagemUrl,
     dataCriacaoDoPerfil,
     startPerfil,
     endPerfil,
@@ -20,6 +21,8 @@ export class ListaUsuariosRepository {
       data: {
         dataCriacaoDoPerfil: dataCriacaoDoPerfil,
         contaId: contaId,
+        nomeUsuario: nomeUsuario,
+        imagemUrl: imagemUrl,
         startPerfil: startPerfil,
         endPerfil: endPerfil,
         id: id,
@@ -65,3 +68,6 @@ export class ListaUsuariosRepository {
     });
   }
 }
+
+
+ewgergqrwgef
