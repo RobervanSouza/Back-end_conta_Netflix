@@ -8,9 +8,7 @@ import { CreateListaUsuarioDto } from './dto/create-lista-usuario.dto';
 import { UpdateListaUsuarioDto } from './dto/update-lista-usuario.dto';
 import { ListaUsuario } from './entities/lista-usuario.entity';
 import { ListaUsuariosRepository } from './lista-usuarios.repository';
-// teteet
-//eger
-//adasdasd
+
 @Injectable()
 export class ListaUsuariosService {
   constructor(
