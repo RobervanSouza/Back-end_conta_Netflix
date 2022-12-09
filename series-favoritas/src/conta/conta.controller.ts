@@ -56,7 +56,7 @@ export class ContaController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     try {
-      return this.contaService.remove(id);
+      return await this.contaService.remove(id);
     } catch (erro) {
       HandleException(erro);
     }

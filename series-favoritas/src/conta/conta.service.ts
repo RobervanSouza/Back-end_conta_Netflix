@@ -31,7 +31,11 @@ export class ContaService {
   }
 
   async remove(id: string): Promise<string> {
-    await this.contaRepository.deleteConta(id);
-    return 'conta deletado';
+    try {
+      await this.contaRepository.deleteConta(id);
+      return 'conta deletado';
+    } catch (err) {
+      throw new Exception(Exceptions.InvaliData, 'id não encontrado');
+    }
   }
 }
