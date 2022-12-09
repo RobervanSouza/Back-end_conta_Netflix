@@ -61,7 +61,7 @@ export class UsuariosController {
         return 'usuario não encontrado';
       }
     } catch (err) {
-      console.log(err);
+      HandleException(err);
     }
   }
 }

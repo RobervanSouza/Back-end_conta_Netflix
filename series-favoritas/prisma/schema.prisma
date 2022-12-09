@@ -11,32 +11,31 @@ datasource db {
 }
 
 model User {
-  id            String         @id @unique
-  name          String
-  email         String         @unique
-  password      String
-  cpf           String         @unique
-  role          String
-  create        DateTime       @default(now())
-  update        DateTime       @updatedAt
-  listaUsuario  ListaUsuario[]
-  ContaUsuario   Conta?      @relation(fields: [contaUsuarioId], references: [id], name: "perfil")
+  id             String         @id @unique
+  name           String
+  email          String         @unique
+  password       String
+  cpf            String         @unique
+  role           String
+  create         DateTime       @default(now())
+  update         DateTime       @updatedAt
+  listaUsuario   ListaUsuario[]
+  ContaUsuario   Conta?         @relation(fields: [contaUsuarioId], references: [id], name: "perfil")
   contaUsuarioId String?
-  ContaAdmin    Conta?    @relation(fields: [contaAdminId], references: [id])
-  contaAdminId  String?
- 
+  ContaAdmin     Conta?         @relation(fields: [contaAdminId], references: [id])
+  contaAdminId   String?
 }
-
-
 
 model ListaUsuario {
   id                  String   @id @unique
   contaId             String
-  Conta               Conta    @relation(fields: [contaId], references: [id])
+  Conta               Conta    @relation(fields: [contaId], references: [id], onDelete: Cascade)
   usuarios            User[]
   dataCriacaoDoPerfil String
   startPerfil         DateTime
   endPerfil           DateTime
+  nomeUsuario         String
+  imagemUrl           String
 }
 
 model Conta {
@@ -49,5 +48,4 @@ model Conta {
   listaUsuario  ListaUsuario[]
   usuarios      User[]         @relation(name: "perfil")
   admin         User[]
-  
 }

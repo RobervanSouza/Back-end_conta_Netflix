@@ -32,17 +32,14 @@ export class UserService {
   }
   async deleteUserById(userId: string): Promise<boolean> {
     try {
-      const existerUsuario = this.userRepository.deleteUsuario(userId);
+      const existerUsuario = await this.userRepository.deleteUsuario(userId);
       if (existerUsuario) {
         return true;
       } else {
         return false;
       }
     } catch (error) {
-      throw new Exception(
-        Exceptions.DataBaseException,
-        'Sua senha tem que ter mais de 6 caracteres ',
-      );
+      throw new Exception(Exceptions.InvaliData, 'Verfique i Id '); // refatorar
       return false;
     }
   }
