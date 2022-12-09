@@ -4,7 +4,7 @@ import { ListaUsuariosController } from './lista-usuarios.controller';
 import { ContaService } from 'src/conta/conta.service';
 import { DataBaseModule } from 'src/prisma/service&database/database.module';
 import { ListaUsuariosRepository } from './lista-usuarios.repository';
-import { ContaRepository } from 'src/conta/conta.reposytory';
+import { ContaRepository } from 'src/conta/conta.repository';
 
 @Module({
   imports: [DataBaseModule],
@@ -12,8 +12,8 @@ import { ContaRepository } from 'src/conta/conta.reposytory';
   providers: [
     ListaUsuariosService,
     ContaService,
-    ListaUsuariosRepository,
     ContaRepository,
+    ListaUsuariosRepository,
   ],
 })
 export class ListaUsuariosModule {}

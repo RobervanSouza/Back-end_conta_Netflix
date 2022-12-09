@@ -7,7 +7,7 @@ import { Conta } from './entities/conta.entity';
 
 @Injectable()
 export class ContaRepository {
-  private dataRetorno = {
+  private includesLista = {
     usuarios: true,
     admin: true,
     listaUsuario: {
@@ -32,39 +32,44 @@ export class ContaRepository {
         desenhos: desenhos,
         shows: shows,
       },
-      include: this.dataRetorno,
+      include: this.includesLista,
     });
   }
   async updateConta(updatedata: UpdateContaDto): Promise<Conta> {
+    const usuariosIds = updatedata.usuariosIds;
+    const adminIds = updatedata.adminIds;
+
+    delete updatedata.usuariosIds;
+    delete updatedata.adminIds;
     return await this.prismaService.conta.update({
       where: { id: updatedata.id },
       data: {
         ...updatedata,
         usuarios: {
-          connect: updatedata.usuariosIds?.map((id) => ({ id: id })),
+          connect: usuariosIds?.map((id) => ({ id: id })),
         },
         admin: {
-          connect: updatedata.adminIds?.map((id) => ({ id: id })),
+          connect: adminIds?.map((id) => ({ id: id })),
         },
       },
-      include: this.dataRetorno,
+      include: this.includesLista,
     });
   }
   async deleteConta(id: string): Promise<Conta> {
     return await this.prismaService.conta.delete({
       where: { id: id },
-      include: this.dataRetorno,
+      include: this.includesLista,
     });
   }
   async findContaId(id: string): Promise<Conta> {
     return await this.prismaService.conta.findUnique({
       where: { id: id },
-      include: this.dataRetorno,
+      include: this.includesLista,
     });
   }
   async findAllConta(): Promise<Conta[]> {
     return await this.prismaService.conta.findMany({
-      include: this.dataRetorno,
+      include: this.includesLista,
     });
   }
 }

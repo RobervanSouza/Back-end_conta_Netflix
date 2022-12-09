@@ -5,5 +5,7 @@ export class RegistrarPerfilDto {
   @ApiProperty()
   @IsString()
   perfilId: string;
+  @ApiProperty()
+  @IsString()
   userId: string;
 }

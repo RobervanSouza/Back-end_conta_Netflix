@@ -31,9 +31,9 @@ export class ContaController {
     return this.contaService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateContaDto: UpdateContaDto) {
-    return this.contaService.update(id, updateContaDto);
+  @Patch()
+  async update(@Body() updateContaDto: UpdateContaDto) {
+    return this.contaService.update(updateContaDto);
   }
 
   @Delete(':id')
