@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common/decorators';
+import { Exception } from 'src/exceptions/exception';
+import { Exceptions } from 'src/exceptions/exceptions.Erro';
 import { PrismaService } from 'src/prisma/service&database/prisma.service';
 import { CreateContaDto } from './dto/create-conta.dto';
 
@@ -23,17 +25,21 @@ export class ContaRepository {
     { series, filmes, documentarios, desenhos, shows }: CreateContaDto,
     id: string,
   ): Promise<Conta> {
-    return await this.prismaService.conta.create({
-      data: {
-        id: id,
-        series: series,
-        filmes: filmes,
-        documentarios: documentarios,
-        desenhos: desenhos,
-        shows: shows,
-      },
-      include: this.includesLista,
-    });
+    try {
+      return await this.prismaService.conta.create({
+        data: {
+          id: id,
+          series: series,
+          filmes: filmes,
+          documentarios: documentarios,
+          desenhos: desenhos,
+          shows: shows,
+        },
+        include: this.includesLista,
+      });
+    } catch (erro) {
+      throw new Exception(Exceptions.DataBaseException, erro.message);
+    }
   }
   async updateConta(updatedata: UpdateContaDto): Promise<Conta> {
     const usuariosIds = updatedata.usuariosIds;
@@ -56,20 +62,32 @@ export class ContaRepository {
     });
   }
   async deleteConta(id: string): Promise<Conta> {
-    return await this.prismaService.conta.delete({
-      where: { id: id },
-      include: this.includesLista,
-    });
+    try {
+      return await this.prismaService.conta.delete({
+        where: { id: id },
+        include: this.includesLista,
+      });
+    } catch (erro) {
+      throw new Exception(Exceptions.DataBaseException, erro.message);
+    }
   }
   async findContaId(id: string): Promise<Conta> {
-    return await this.prismaService.conta.findUnique({
-      where: { id: id },
-      include: this.includesLista,
-    });
+    try {
+      return await this.prismaService.conta.findUnique({
+        where: { id: id },
+        include: this.includesLista,
+      });
+    } catch (erro) {
+      throw new Exception(Exceptions.DataBaseException, erro.message);
+    }
   }
   async findAllConta(): Promise<Conta[]> {
-    return await this.prismaService.conta.findMany({
-      include: this.includesLista,
-    });
+    try {
+      return await this.prismaService.conta.findMany({
+        include: this.includesLista,
+      });
+    } catch (erro) {
+      throw new Exception(Exceptions.DataBaseException, erro.message);
+    }
   }
 }

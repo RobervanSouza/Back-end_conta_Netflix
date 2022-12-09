@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { HandleException } from 'src/exceptions/exceptions.Erro';
 
 import { ContaService } from './conta.service';
 import { CreateContaDto } from './dto/create-conta.dto';
@@ -17,27 +18,47 @@ export class ContaController {
   constructor(private readonly contaService: ContaService) {}
 
   @Post()
-  create(@Body() createContaDto: CreateContaDto) {
-    return this.contaService.create(createContaDto);
+  async create(@Body() createContaDto: CreateContaDto) {
+    try {
+      return this.contaService.create(createContaDto);
+    } catch (erro) {
+      HandleException(erro);
+    }
   }
 
   @Get()
-  findAll() {
-    return this.contaService.findAll();
+  async findAll() {
+    try {
+      return this.contaService.findAll();
+    } catch (err) {
+      HandleException(err);
+    }
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.contaService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    try {
+      return this.contaService.findOne(id);
+    } catch (erro) {
+      HandleException(erro);
+    }
   }
 
   @Patch()
   async update(@Body() updateContaDto: UpdateContaDto) {
-    return this.contaService.update(updateContaDto);
+    try {
+      return this.contaService.update(updateContaDto);
+    } catch (erro) {
+      HandleException(erro);
+    }
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.contaService.remove(id);
+  async remove(@Param('id') id: string) {
+    try {
+      return this.contaService.remove(id);
+    } catch (erro) {
+      HandleException(erro);
+    }
   }
 }

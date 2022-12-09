@@ -32,6 +32,6 @@ export class ContaService {
 
   async remove(id: string): Promise<string> {
     await this.contaRepository.deleteConta(id);
-    return 'conta deletada';
+    return 'conta deletado';
   }
 }

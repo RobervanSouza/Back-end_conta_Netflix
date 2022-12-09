@@ -24,9 +24,14 @@ export class ListaUsuariosController {
   }
 
   @Post('RegistarPerfil')
-  async registrarPerfil(@Body() { perfilId, userId }: RegistrarPerfilDto) {
+  async registrarPerfil(
+    @Body() { listaUsuarioId, userId }: RegistrarPerfilDto,
+  ) {
     try {
-      return await this.listaUsuariosService.RegistrarPerfil(perfilId, userId);
+      return await this.listaUsuariosService.RegistrarPerfil(
+        listaUsuarioId,
+        userId,
+      );
     } catch (error) {
       HandleException(error);
     }

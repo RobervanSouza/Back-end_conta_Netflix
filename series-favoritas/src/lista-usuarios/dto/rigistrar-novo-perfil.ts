@@ -4,7 +4,7 @@ import { IsString } from 'class-validator';
 export class RegistrarPerfilDto {
   @ApiProperty()
   @IsString()
-  perfilId: string;
+  listaUsuarioId: string;
   @ApiProperty()
   @IsString()
   userId: string;
