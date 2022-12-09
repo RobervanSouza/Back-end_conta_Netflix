@@ -12,7 +12,7 @@ async function bootstrap() {
     .setTitle('API-SERIES')
     .setDescription('Api Series')
     .setVersion('1.0')
-    .addTag('usuarios')
+    .addTag('Series favoritas')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

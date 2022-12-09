@@ -8,8 +8,10 @@ import { UsuarioDto } from '../dto/userdto';
 import { UserPartialDto } from '../dto/UserParcialDto';
 import { Response } from 'express';
 import { HandleException } from 'src/exceptions/exceptions.Erro';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller()
+@ApiTags('Criar usuarios')
 export class UsuariosController {
   constructor(private readonly service: UserService) {}
 

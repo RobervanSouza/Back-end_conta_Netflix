@@ -7,17 +7,19 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { HandleException } from 'src/exceptions/exceptions.Erro';
 
 import { ContaService } from './conta.service';
 import { CreateContaDto } from './dto/create-conta.dto';
 import { UpdateContaDto } from './dto/update-conta.dto';
 
-@Controller('conta')
+@Controller()
+@ApiTags('Conta')
 export class ContaController {
   constructor(private readonly contaService: ContaService) {}
 
-  @Post()
+  @Post('Cria Conta')
   async create(@Body() createContaDto: CreateContaDto) {
     try {
       return this.contaService.create(createContaDto);
@@ -26,7 +28,7 @@ export class ContaController {
     }
   }
 
-  @Get()
+  @Get('Todos os dados da conta')
   async findAll() {
     try {
       return this.contaService.findAll();
@@ -35,7 +37,7 @@ export class ContaController {
     }
   }
 
-  @Get(':id')
+  @Get('Id da conta')
   async findOne(@Param('id') id: string) {
     try {
       return this.contaService.findOne(id);
@@ -44,7 +46,7 @@ export class ContaController {
     }
   }
 
-  @Patch()
+  @Patch('Edita Conta')
   async update(@Body() updateContaDto: UpdateContaDto) {
     try {
       return this.contaService.update(updateContaDto);
@@ -53,7 +55,7 @@ export class ContaController {
     }
   }
 
-  @Delete(':id')
+  @Delete('Deleta Conta')
   async remove(@Param('id') id: string) {
     try {
       return await this.contaService.remove(id);
