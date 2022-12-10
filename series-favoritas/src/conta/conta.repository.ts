@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common/decorators';
 import { Exception } from 'src/exceptions/exception';
 import { Exceptions } from 'src/exceptions/exceptions.Erro';
 import { PrismaService } from 'src/prisma/service&database/prisma.service';
+
 import { CreateContaDto } from './dto/create-conta.dto';
 
 import { UpdateContaDto } from './dto/update-conta.dto';

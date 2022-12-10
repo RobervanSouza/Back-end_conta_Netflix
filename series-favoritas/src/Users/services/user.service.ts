@@ -6,6 +6,8 @@ import { UsuarioRepository } from 'src/Users/repository/usuario.repository';
 import { Injectable } from '@nestjs/common';
 import { Exception } from 'src/exceptions/exception';
 import { Exceptions } from 'src/exceptions/exceptions.Erro';
+import { hash } from 'bcrypt';
+
 @Injectable()
 export class UserService {
   constructor(private readonly userRepository: UsuarioRepository) {}
@@ -17,6 +19,9 @@ export class UserService {
         'Sua senha tem que ter mais de 6 caracteres ',
       );
     }
+    const hashPassword = await hash(user.password, 10);
+    usuariosInterface.password = hashPassword;
+
     const usuarioCriado = await this.userRepository.createUsuario(
       usuariosInterface,
     );
@@ -49,5 +54,9 @@ export class UserService {
     const existeUsuario = await this.userRepository.findUsuarioById(userId);
     delete existeUsuario.password;
     return existeUsuario;
+  }
+  async findUserByEmail(email: string): Promise<Iusuarios> {
+    const user = await this.userRepository.findUserByEmail(email);
+    return user;
   }
 }

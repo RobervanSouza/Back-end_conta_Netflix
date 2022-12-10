@@ -70,4 +70,14 @@ export class UsuarioRepository {
       );
     }
   }
+  async findUserByEmail(email: string): Promise<Iusuarios> {
+    try {
+      const userEmail = await this.prisma.user.findUniqueOrThrow({
+        where: { email: email },
+      });
+      return userEmail;
+    } catch (erro) {
+      throw new Exception(Exceptions.DataBaseException, 'Email não cadastrado');
+    }
+  }
 }
