@@ -39,7 +39,7 @@ export class UserService {
         return false;
       }
     } catch (error) {
-      throw new Exception(Exceptions.InvaliData, 'Verfique i Id '); // refatorar
+      throw new Exception(Exceptions.InvaliData, 'Verfique i Id '); //! refatorar
       return false;
     }
   }

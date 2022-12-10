@@ -19,7 +19,7 @@ import { UpdateContaDto } from './dto/update-conta.dto';
 export class ContaController {
   constructor(private readonly contaService: ContaService) {}
 
-  @Post('Cria Conta')
+  @Post('Cria-Conta')
   async create(@Body() createContaDto: CreateContaDto) {
     try {
       return this.contaService.create(createContaDto);
@@ -28,7 +28,7 @@ export class ContaController {
     }
   }
 
-  @Get('Todos os dados da conta')
+  @Get('Todos-conta')
   async findAll() {
     try {
       return this.contaService.findAll();
@@ -37,7 +37,7 @@ export class ContaController {
     }
   }
 
-  @Get('Id da conta')
+  @Get('Id-da-conta')
   async findOne(@Param('id') id: string) {
     try {
       return this.contaService.findOne(id);
@@ -46,7 +46,7 @@ export class ContaController {
     }
   }
 
-  @Patch('Edita Conta')
+  @Patch('Editar-Conta')
   async update(@Body() updateContaDto: UpdateContaDto) {
     try {
       return this.contaService.update(updateContaDto);
@@ -55,7 +55,7 @@ export class ContaController {
     }
   }
 
-  @Delete('Deleta Conta')
+  @Delete('Deleta-Conta')
   async remove(@Param('id') id: string) {
     try {
       return await this.contaService.remove(id);
