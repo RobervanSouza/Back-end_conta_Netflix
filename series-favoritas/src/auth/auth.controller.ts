@@ -4,6 +4,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
+import { AdminAuthorization } from './decorators/admin.decorator';
 import { userLoginDto } from './dto/user.login.input.dto';
 
 @Controller('Authorization')
@@ -17,9 +18,9 @@ export class AuthorizationController {
   }
 
   @Get()
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard(), AdminAuthorization)
   @ApiBearerAuth()
   async getUser(@Request() req) {
-    console.log(req);
+    return 'Usuario autorizado';
   }
 }

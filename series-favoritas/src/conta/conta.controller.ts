@@ -6,8 +6,11 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AdminAuthorization } from 'src/auth/decorators/admin.decorator';
 import { HandleException } from 'src/exceptions/exceptions.Erro';
 
 import { ContaService } from './conta.service';
@@ -27,7 +30,8 @@ export class ContaController {
       HandleException(erro);
     }
   }
-
+  @UseGuards(AuthGuard(), AdminAuthorization)
+  @ApiBearerAuth()
   @Get('Todos-conta')
   async findAll() {
     try {
@@ -36,7 +40,8 @@ export class ContaController {
       HandleException(err);
     }
   }
-
+  @UseGuards(AuthGuard(), AdminAuthorization)
+  @ApiBearerAuth()
   @Get('Id-da-conta')
   async findOne(@Param('id') id: string) {
     try {
@@ -45,7 +50,8 @@ export class ContaController {
       HandleException(erro);
     }
   }
-
+  @UseGuards(AuthGuard(), AdminAuthorization)
+  @ApiBearerAuth()
   @Patch('Editar-Conta')
   async update(@Body() updateContaDto: UpdateContaDto) {
     try {
@@ -54,7 +60,8 @@ export class ContaController {
       HandleException(erro);
     }
   }
-
+  @UseGuards(AuthGuard(), AdminAuthorization)
+  @ApiBearerAuth()
   @Delete('Deleta-Conta')
   async remove(@Param('id') id: string) {
     try {
