@@ -20,11 +20,13 @@ export class UserService {
     const usuarioCriado = await this.userRepository.createUsuario(
       usuariosInterface,
     );
+    delete usuarioCriado.password;
     return usuarioCriado;
   }
 
   async updateUsuario(userData: UserPartialDto): Promise<Iusuarios> {
     const updateUsuario = await this.userRepository.updateUsuario(userData);
+    delete updateUsuario.password;
     return updateUsuario;
   }
   async todosUsuarios(): Promise<Iusuarios[]> {
@@ -45,6 +47,7 @@ export class UserService {
   }
   async UsuarioById(userId: string): Promise<Iusuarios> {
     const existeUsuario = await this.userRepository.findUsuarioById(userId);
+    delete existeUsuario.password;
     return existeUsuario;
   }
 }

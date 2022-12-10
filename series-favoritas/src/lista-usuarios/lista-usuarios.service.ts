@@ -3,7 +3,7 @@ import { randomUUID } from 'crypto';
 import { ContaService } from 'src/conta/conta.service';
 import { Exception } from 'src/exceptions/exception';
 import { Exceptions } from 'src/exceptions/exceptions.Erro';
-import { UserService } from 'src/Users/services/user.service';
+
 import { CreateListaUsuarioDto } from './dto/create-lista-usuario.dto';
 import { UpdateListaUsuarioDto } from './dto/update-lista-usuario.dto';
 import { ListaUsuario } from './entities/lista-usuario.entity';
@@ -13,7 +13,7 @@ import { ListaUsuariosRepository } from './lista-usuarios.repository';
 export class ListaUsuariosService {
   constructor(
     private readonly contaService: ContaService,
-    private readonly userService: UserService,
+
     private readonly listaUsuariosRepository: ListaUsuariosRepository,
   ) {}
   async create(
