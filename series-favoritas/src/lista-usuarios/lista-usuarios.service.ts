@@ -54,7 +54,7 @@ export class ListaUsuariosService {
     userId: string,
   ): Promise<ListaUsuario> {
     const findListaUsuarios = await this.findOne(listaUsuarioId);
-    const existeUsuario = await this.userService.UsuarioById(userId);
+
     const existeConta = await this.contaService.findOne(
       findListaUsuarios.contaId,
     );
@@ -62,8 +62,12 @@ export class ListaUsuariosService {
     if (dataAtual.getTime() > findListaUsuarios.endPerfil.getTime()) {
       throw new Exception(Exceptions.InvaliData, 'error ao criar');
     }
+    const usuarios = new Map<string, any>();
+    for (const usuario of existeConta.usuarios) {
+      usuarios.set(usuario.id, { ...usuario });
+    }
 
-    if (!existeConta.usuarios.includes(existeUsuario)) {
+    if (!usuarios.get(userId) === undefined) {
       throw new Exception(
         Exceptions.InvaliData,
         'Não existe estudande na sala',

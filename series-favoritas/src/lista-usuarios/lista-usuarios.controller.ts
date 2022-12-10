@@ -20,7 +20,7 @@ import { ApiTags } from '@nestjs/swagger';
 export class ListaUsuariosController {
   constructor(private readonly listaUsuariosService: ListaUsuariosService) {}
 
-  @Post('Cria perfil')
+  @Post('Cria-perfil')
   create(@Body() createListaUsuarioDto: CreateListaUsuarioDto) {
     return this.listaUsuariosService.create(createListaUsuarioDto);
   }
@@ -39,17 +39,17 @@ export class ListaUsuariosController {
     }
   }
 
-  @Get('Todos os perfil criado')
+  @Get('Todo-perfil')
   findAll() {
     return this.listaUsuariosService.findAll();
   }
 
-  @Get('Buscar um perfil')
+  @Get('Buscar-perfil')
   findOne(@Param('id') id: string) {
     return this.listaUsuariosService.findOne(id);
   }
 
-  @Patch('Editar um perfil')
+  @Patch('Editar-perfil')
   update(@Body() updateListaUsuarioDto: UpdateListaUsuarioDto) {
     return this.listaUsuariosService.update(updateListaUsuarioDto);
   }
