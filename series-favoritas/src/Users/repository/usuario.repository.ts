@@ -3,8 +3,8 @@ import { Exception } from 'src/exceptions/exception';
 import { Exceptions } from 'src/exceptions/exceptions.Erro';
 import { PrismaService } from 'src/prisma/service&database/prisma.service';
 
-import { UserPartialDto } from 'src/Users/dto/UserParcialDto';
-import { Iusuarios } from 'src/Users/UsuariosInterface/usuarios';
+import { UserPartialDto } from 'src/users/dto/UserParcialDto';
+import { Iusuarios } from 'src/users/UsuariosInterface/usuarios';
 @Injectable()
 export class UsuarioRepository {
   constructor(private readonly prisma: PrismaService) {}

@@ -2,7 +2,7 @@ import { Iusuarios } from '../UsuariosInterface/usuarios';
 import { UsuarioDto } from '../dto/userdto';
 import { randomUUID } from 'node:crypto';
 import { UserPartialDto } from '../dto/UserParcialDto';
-import { UsuarioRepository } from 'src/Users/repository/usuario.repository';
+import { UsuarioRepository } from 'src/users/repository/usuario.repository';
 import { Injectable } from '@nestjs/common';
 import { Exception } from 'src/exceptions/exception';
 import { Exceptions } from 'src/exceptions/exceptions.Erro';

@@ -4,6 +4,7 @@ import { JwtModule } from '@nestjs/jwt/dist';
 import { PassportModule } from '@nestjs/passport';
 import { DataBaseModule } from 'src/prisma/service&database/database.module';
 import { UsuarioRepository } from 'src/users/repository/usuario.repository';
+
 import { UserService } from 'src/users/services/user.service';
 import { AuthorizationController } from './auth.controller';
 import { AuthService } from './auth.service';
