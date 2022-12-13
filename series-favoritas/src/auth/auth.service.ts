@@ -4,8 +4,8 @@ import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
 import { Exception } from 'src/exceptions/exception';
 import { Exceptions } from 'src/exceptions/exceptions.Erro';
-import { UserService } from 'src/Users/services/user.service';
-import { Iusuarios } from 'src/Users/UsuariosInterface/usuarios';
+import { UserService } from 'src/users/services/user.service';
+import { Iusuarios } from 'src/users/UsuariosInterface/usuarios';
 import { userLoginDto } from './dto/user.login.input.dto';
 
 @Injectable()

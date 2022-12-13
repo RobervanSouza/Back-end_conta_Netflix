@@ -17,7 +17,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { AdminAuthorization } from 'src/auth/decorators/admin.decorator';
 import { UserLogged } from 'src/auth/decorators/user-logged.decorator';
-import { Iusuarios } from 'src/Users/UsuariosInterface/usuarios';
+import { Iusuarios } from 'src/users/UsuariosInterface/usuarios';
 
 @Injectable()
 @Controller()

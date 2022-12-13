@@ -3,7 +3,7 @@ import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { HandleException } from 'src/exceptions/exceptions.Erro';
-import { Iusuarios } from 'src/Users/UsuariosInterface/usuarios';
+import { Iusuarios } from 'src/users/UsuariosInterface/usuarios';
 
 import { AuthService } from './auth.service';
 import { AdminAuthorization } from './decorators/admin.decorator';

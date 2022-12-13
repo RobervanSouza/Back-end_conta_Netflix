@@ -1,6 +1,6 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
-import { Iusuarios } from 'src/Users/UsuariosInterface/usuarios';
+import { Iusuarios } from 'src/users/UsuariosInterface/usuarios';
 
 export const UserLogged = createParamDecorator(
   (data: unknown, ctx: ExecutionContext): Iusuarios => {
