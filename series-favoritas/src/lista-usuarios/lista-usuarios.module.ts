@@ -6,7 +6,7 @@ import { DataBaseModule } from 'src/prisma/service&database/database.module';
 import { ListaUsuariosRepository } from './lista-usuarios.repository';
 import { ContaRepository } from 'src/conta/conta.repository';
 
-import { UsuarioRepository } from 'src/Users/repository/usuario.repository';
+import { UsuarioRepository } from 'src/users/repository/usuario.repository';
 import { PassportModule } from '@nestjs/passport';
 
 @Module({
