@@ -5,6 +5,7 @@ export class CreateListaUsuarioDto {
   @ApiProperty()
   @IsString()
   contaId: string;
+
   @ApiProperty()
   @IsString()
   nomeUsuario: string;

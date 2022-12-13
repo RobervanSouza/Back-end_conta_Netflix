@@ -7,9 +7,13 @@ import { ListaUsuariosRepository } from './lista-usuarios.repository';
 import { ContaRepository } from 'src/conta/conta.repository';
 
 import { UsuarioRepository } from 'src/Users/repository/usuario.repository';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
-  imports: [DataBaseModule],
+  imports: [
+    DataBaseModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+  ],
   controllers: [ListaUsuariosController],
   providers: [
     ListaUsuariosService,

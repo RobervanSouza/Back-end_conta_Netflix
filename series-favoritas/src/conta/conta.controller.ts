@@ -21,7 +21,8 @@ import { UpdateContaDto } from './dto/update-conta.dto';
 @ApiTags('Conta')
 export class ContaController {
   constructor(private readonly contaService: ContaService) {}
-
+  @UseGuards(AuthGuard(), AdminAuthorization)
+  @ApiBearerAuth()
   @Post('Cria-Conta')
   async create(@Body() createContaDto: CreateContaDto) {
     try {

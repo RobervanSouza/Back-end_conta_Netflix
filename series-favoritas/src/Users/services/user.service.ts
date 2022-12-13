@@ -12,7 +12,11 @@ import { hash } from 'bcrypt';
 export class UserService {
   constructor(private readonly userRepository: UsuarioRepository) {}
   async createUsuario(user: UsuarioDto): Promise<Iusuarios> {
-    const usuariosInterface = { ...user, id: randomUUID() };
+    const usuariosInterface: Iusuarios = {
+      ...user,
+      id: randomUUID(),
+      role: 'user',
+    };
     if (user.password.length <= 7) {
       throw new Exception(
         Exceptions.InvaliData,

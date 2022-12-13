@@ -1,4 +1,13 @@
-import { Body, Delete, Get, Param, Patch, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 
 import { Iusuarios } from '../UsuariosInterface/usuarios';
 
@@ -8,17 +17,23 @@ import { UsuarioDto } from '../dto/userdto';
 import { UserPartialDto } from '../dto/UserParcialDto';
 import { Response } from 'express';
 import { HandleException } from 'src/exceptions/exceptions.Erro';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AdminAuthorization } from 'src/auth/decorators/admin.decorator';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller()
 @ApiTags('Criar usuarios')
 export class UsuariosController {
   constructor(private readonly service: UserService) {}
 
+  @UseGuards(AuthGuard(), AdminAuthorization)
+  @ApiBearerAuth()
   @Get('Todos-usuarios')
   async getAllUsuarios(): Promise<Iusuarios[]> {
     return await this.service.todosUsuarios();
   }
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @Get('Procura-usuario-pelo:id')
   async getIdUsuario(@Param('id') usuarioId: string): Promise<Iusuarios> {
     try {
@@ -29,7 +44,7 @@ export class UsuariosController {
   }
   @Post('Cria-usuario')
   async createUsuario(
-    @Body() { cpf, email, password, name, role }: UsuarioDto,
+    @Body() { cpf, email, password, name }: UsuarioDto,
     @Res() response: Response,
   ) {
     try {
@@ -38,13 +53,14 @@ export class UsuariosController {
         email,
         password,
         name,
-        role,
       });
       response.status(201).send(result);
     } catch (erro) {
       HandleException(erro);
     }
   }
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @Patch('Edita-usuario')
   async updateUser(@Body() userdata: UserPartialDto): Promise<Iusuarios> {
     try {
@@ -53,6 +69,9 @@ export class UsuariosController {
       HandleException(erro);
     }
   }
+
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @Delete('Deleta-usuario:id')
   async deleteUserById(@Param('id') userId: string): Promise<string> {
     try {

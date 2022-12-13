@@ -5,7 +5,4 @@ export class RegistrarPerfilDto {
   @ApiProperty()
   @IsString()
   listaUsuarioId: string;
-  @ApiProperty()
-  @IsString()
-  userId: string;
 }

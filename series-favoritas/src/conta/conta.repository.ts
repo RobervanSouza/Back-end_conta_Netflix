@@ -50,6 +50,7 @@ export class ContaRepository {
     delete updatedata.adminIds;
     return await this.prismaService.conta.update({
       where: { id: updatedata.id },
+
       data: {
         ...updatedata,
         usuarios: {
