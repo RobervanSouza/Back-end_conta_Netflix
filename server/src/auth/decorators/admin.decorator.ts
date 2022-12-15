@@ -1,6 +1,9 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { Exception } from 'src/exceptions/exception';
-import { Exceptions } from 'src/exceptions/exceptions.Erro';
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 
 @Injectable()
 export class AdminAuthorization implements CanActivate {
@@ -11,6 +14,6 @@ export class AdminAuthorization implements CanActivate {
     if (data?.role === 'admin') {
       return true;
     }
-    throw new Exception(Exceptions.UnauthorizedException, 'Acesso Restrito');
+    throw new UnauthorizedException('Acesso Restrito');
   }
 }
